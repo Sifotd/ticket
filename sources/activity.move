@@ -16,7 +16,7 @@ module rwa::activity{
     }
    fun init(){}
 
-    public entry fun create_activity(_admin:F_Admin,activity:Activity,activities:& mut Activities){
+    // public entry fun create_activity(_admin:,activity:Activity,activities:& mut Activities){
 
-    }
+    // }
 }
