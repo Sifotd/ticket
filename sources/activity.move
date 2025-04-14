@@ -1,7 +1,7 @@
 module rwa::activity{
 
     use std::string::{String};
-    use rwa::admin::F_Admin;
+
 
 
     public struct Activity has key,store{
@@ -14,7 +14,7 @@ module rwa::activity{
         id:UID,
         all:vector<Activity>,
     }
-   fun init(){}
+    //    fun init(){}
 
     // public entry fun create_activity(_admin:,activity:Activity,activities:& mut Activities){
 

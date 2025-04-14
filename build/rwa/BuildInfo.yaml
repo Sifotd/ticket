@@ -8,7 +8,7 @@ compiled_package_info:
     std: "0000000000000000000000000000000000000000000000000000000000000001"
     sui: "0000000000000000000000000000000000000000000000000000000000000002"
     sui_system: "0000000000000000000000000000000000000000000000000000000000000003"
-  source_digest: B32B5880978E2C6D4D676E209E35D6580615CC92778389D09414A7F8955197C8
+  source_digest: 4753152F7C06E69F06BAB9517B345192F55A40129365D96AB6C08F1731AA8494
   build_flags:
     dev_mode: false
     test_mode: false
@@ -16,7 +16,7 @@ compiled_package_info:
     save_disassembly: false
     install_dir: ~
     force_recompilation: false
-    lock_file: "./Move.lock"
+    lock_file: ".\\Move.lock"
     fetch_deps_only: false
     skip_fetch_latest_git_deps: false
     default_flavor: sui
