@@ -1,7 +1,8 @@
 module rwa::activity{
 
     use std::string::{String};
-    use sui::transfer::{public_transfer};
+    use sui::transfer::{public_transfer, public_share};
+    use rwa::admin::F_Admin;
 
 
     //活动和管理员类似
@@ -22,12 +23,18 @@ module rwa::activity{
             info,
             admin:ctx.sender(),
         };
-        public_transfer(new_activity,ctx.sender());
+        let  mut activities =Activities{
+          all:vector::empty(),
+        };
+        public_share(new_activity);
+
 
     }
 
-    //申请活动
-    public entry fun apply(activity:&Activiti,ctx:&mut TxContext){
+    //申请活动，活动通过就加入活动列表
+
+    public entry fun apply(_admin:&F_Admin,activity:&Activiti,activities:&mut  Activities,ctx:&mut TxContext){
+        vector::push_back(&mut activities.all,&activity.id);
 
     }
 
