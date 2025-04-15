@@ -7,12 +7,15 @@ module rwa::admin{
     use sui::transfer::{public_transfer};
     use std::vector::{empty,contains};
 
-    // public struct F_Admin has key,store{
-    //     id :UID,
-    // }
+   
     public struct Roledata has key, store{
          id:UID,
          roles:vector<address>,
+    }
+
+    public struct F_Admin has key,store{
+        id:UID,
+        admin:address,
     }
  
     // 管理员和管理员们
@@ -22,11 +25,19 @@ module rwa::admin{
             id:object::new(ctx),
             roles:vector::empty(),
         };
-        //将当前活动的发起者加入管理员列表
+        //初始化最高管理者
+        let f_admin =F_Admin{
+        id:object::new(ctx),
+        admin:ctx.sender(),
+        };
+        //将当前合约的发起者加入管理员列表
         vector::push_back(&mut admins.roles,ctx.sender());
         public_transfer(admins,ctx.sender());
-     
+        public_transfer(f_admin,ctx.sender());
     }
+
+    
+
     //增加管理员
     public entry fun add_admins(admins:&mut Roledata,add_admin:address,ctx:&TxContext){
         // assert(ctx.sender()!=ADMIN_ADDRESS,NOT_ADMIN);
@@ -47,4 +58,6 @@ module rwa::admin{
         };
 
     }
+    
+    //批准活动的举行
 }
