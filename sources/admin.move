@@ -59,5 +59,5 @@ module rwa::admin{
 
     }
     
-    //批准活动的举行
+    
 }

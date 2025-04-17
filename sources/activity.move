@@ -70,7 +70,12 @@ module rwa::activity {
        member:address
        ):bool
      {
-       
+       if(activity.admin == member){
+         return true;
+       }
+       else{
+         return false;
+       }
      }
 
 
@@ -85,7 +90,40 @@ module rwa::activity {
     }
 
    //更新活动信息
-   public entry fun update_activity(){
+   public entry fun update_activity(
+        activity: &mut Activiti,
+        info: String,
+        start_time:u64,
+        end_time:u64,
+        fare:u64,
+        max_people:u64,
+        ctx: &mut TxContext
+    ){
+        //先判断活动的修改者是否是活动的发起者
+        assert!(activity.admin == ctx.sender(), 1); // 如果不是发起者，抛出错误
+        //更新活动信息
+        activity.info = info;
+        activity.start_time = start_time;
+        activity.end_time = end_time;
+        activity.fare = fare;
+        activity.max_people = max_people;
+    }
+   
     
-   }
+    // 删除活动
+    public entry fun delete_activity(
+        activity: &mut Activiti,
+        activities: &mut Activities,
+        ctx: &mut TxContext
+    ) {
+        // 先判断活动的删除者是否是活动的发起者
+        assert!(activity.admin == ctx.sender(), 1); // 如果不是发起者，抛出错误
+        // 删除活动
+        let delete_address = uid_to_address(&activity.id);
+        let index = vector::index_of(&activities.all, &delete_address); // 使用值而不是引用
+        assert!(index != vector::length(&activities.all), 2); // 如果活动不存在，抛出错误
+        vector::remove(&mut activities.all, index); // 使用值而不是引用
+    }
+    
+    //线下活动验证
 }
